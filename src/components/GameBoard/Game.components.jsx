@@ -70,8 +70,7 @@ class GameBoard extends React.Component {
       console.log(this.state.player2.total);
 
     }
-    // document.querySelector(".dice").textContent = `${dice1} ${dice2}`;
-    // document.querySelector(".sum").textContent = `${dice1 + dice2}`;
+  
   };
 
   whoHold = () => {
@@ -112,21 +111,6 @@ class GameBoard extends React.Component {
         },
       });
     }
-  };
-
-  playerHold = async () => {
-    let player = this.state.player1.isCurrent ? "player1" : "player2";
-
-    await this.setState({ // adding count to total and reset count
-      [player]: {
-        count: 0,
-        total: this.state[player].total + this.state[player].count,
-        isCurrent: true,
-      },
-    });
-
-    // this.checkIfWinner(maxPoints);
-    await this.whoHold(); // await to switch turn when the amounts and total are updated
   };
 
   newGame = () => {
