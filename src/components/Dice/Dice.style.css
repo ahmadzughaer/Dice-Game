@@ -1,0 +1,10 @@
+.dice{
+    display: none;
+}
+
+.dice img {
+    width: 5em;
+    height: 5em;
+    margin-right: 15%;
+    border: solid 1px black;
+}

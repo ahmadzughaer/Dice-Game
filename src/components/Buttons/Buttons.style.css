@@ -1,0 +1,8 @@
+button {
+    width: 7em;
+    height: 2em;
+    margin: 2%;
+    background: rgb(136, 115, 83);
+    color: white;
+    border: transparent;
+}
