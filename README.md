@@ -1,5 +1,4 @@
 # Dice Game
-https://laughing-wing-3ea58c.netlify.app/
 This game created by: 
 * React 
 * JSX 
