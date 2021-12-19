@@ -5,3 +5,12 @@
     margin-left: 1%;
     margin-top: 15%;
 }
+
+.input {
+    width: 6em;
+    margin-left: 5%;
+}
+label {
+    font-size: 14px;
+    margin-right: 10%;
+}

@@ -1,8 +1,13 @@
 button {
     width: 7em;
     height: 2em;
-    margin: 2%;
+    margin: 1%;
     background: rgb(136, 115, 83);
     color: white;
     border: transparent;
+    font-size: 1em;
+}
+
+i {
+    margin-right: 5%;
 }
