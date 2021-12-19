@@ -69,7 +69,6 @@ class GameBoard extends React.Component {
             color: activeBorder,
           },
         });
-        console.log("isSix");
       }
     }
     if (this.state.player2.isTurn === true) {
@@ -102,6 +101,7 @@ class GameBoard extends React.Component {
        
       }
     }
+    this.whoIsWinner(highestScore)
   };
 
   whoHold = () => {
@@ -159,9 +159,8 @@ class GameBoard extends React.Component {
       }
     }
   };
-  whoIsWinner = () => {
+  whoIsWinner = (highestScore) => {
     if (highestScore === this.state.player1.total) {
-      console.log(this.state.player1.total);
       alert("Player 1 is the winner");
     } else if (highestScore === this.state.player2.total) {
       alert("Player 2 is the winner");
@@ -172,16 +171,17 @@ class GameBoard extends React.Component {
       player1: {
         count: 0,
         total: 0,
-        isCurrent: true,
+        isTurn: true,
         background: whoIsActiveBackground,
+        color: activeBorder,
       },
       player2: {
         count: 0,
         total: 0,
-        isCurrent: false,
+        isTurn: false,
         background: whoIsNotActiveBackground,
+        color: notActiveBorder,
       },
-      winner: ["", "hidden"],
     });
   };
 
