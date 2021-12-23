@@ -11,15 +11,21 @@ import dice5 from "../../images/dice-5.png";
 import dice6 from "../../images/dice-6.png";
 
 const dice = [dice1, dice2, dice3, dice4, dice5, dice6];
-const whoIsActiveBackground = "silver";
-const whoIsNotActiveBackground = "grey";
+const whoIsActiveBackground = "#F4F9FF";
+const whoIsNotActiveBackground = "#E5F2FF";
 const activeBorder = "green";
 const notActiveBorder = "red";
-const highestScore = 100;
+let highestScore = 100;
 
 let diceNum1, diceNum2;
 
 class GameBoard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef();
+  }
+
+
   state = {
     player1: {
       count: 0,
@@ -27,6 +33,7 @@ class GameBoard extends React.Component {
       isTurn: true,
       background: whoIsActiveBackground,
       color: activeBorder,
+   
     },
     player2: {
       count: 0,
@@ -34,9 +41,26 @@ class GameBoard extends React.Component {
       isTurn: false,
       background: whoIsNotActiveBackground,
       color: notActiveBorder,
+ 
     },
     dice: [Math.ceil(Math.random() * 6), Math.ceil(Math.random() * 6)],
   };
+
+  componentDidMount() {
+    this.inputRef.current.focus();
+  }
+  
+  handleChange = (event) => {
+    if(event.target.value >= 0) {
+    highestScore = event.target.value ;
+    this.newGame()
+    }
+    else {
+      alert("you can only set the final score more than 0")
+      event.target.value = '';
+    }
+  };
+
 
   diceRolling = () => {
     diceNum1 = Math.ceil(Math.random() * 6);
@@ -98,10 +122,10 @@ class GameBoard extends React.Component {
             color: activeBorder,
           },
         });
-       
       }
     }
-    this.whoIsWinner(highestScore)
+    this.whoIsWinner(highestScore);
+  
   };
 
   whoHold = () => {
@@ -158,11 +182,15 @@ class GameBoard extends React.Component {
         });
       }
     }
+    this.whoIsWinner(highestScore);
   };
-  whoIsWinner = (highestScore) => {
-    if (highestScore === this.state.player1.total) {
+  whoIsWinner = (winPoints) => {
+    if (this.state.player1.total >= winPoints) {
+      this.newGame();
       alert("Player 1 is the winner");
-    } else if (highestScore === this.state.player2.total) {
+    }
+    if (this.state.player2.total >= winPoints) {
+      this.newGame();
       alert("Player 2 is the winner");
     }
   };
@@ -196,22 +224,30 @@ class GameBoard extends React.Component {
           color={this.state.player1.color}
         />
         <div className="Buttons">
-          <Button buttonText="New Game" 
-          onClickFunc={this.newGame}
-           icon="fas fa-plus"
+          <Button
+            buttonText="New Game"
+            onClickFunc={this.newGame}
+            icon="fas fa-plus"
           />
           <Button
             buttonText="Roll Dice"
             onClickFunc={this.diceRolling}
             icon="fas fa-dice-five"
           />
-          <Button buttonText="Hold"
-           onClickFunc={this.whoHold} 
-           icon="fas fa-random"
-           />
-          <Dice src1={dice[diceNum1 - 1]} src2={dice[diceNum2 - 1]}></Dice>
+          <Button
+            buttonText="Hold"
+            onClickFunc={this.whoHold}
+            icon="fas fa-random"
+          />
           <label>Enter Final Score</label>
-          <input type="text" className="input"></input>
+          <input
+            ref={this.inputRef}
+            onChange={this.handleChange}
+            value={this.state.value}
+            type="text"
+            className="input"
+          ></input>
+          <Dice src1={dice[diceNum1 - 1]} src2={dice[diceNum2 - 1]}></Dice>
         </div>
 
         <Player
